@@ -37,5 +37,6 @@ jobs:
           for i in read_data:
             vm_list.append(i["name"])
           print(vm_list)
+          print(f"::set-output name=myOutput::{vm_list}")
          
         shell: python
