@@ -17,10 +17,7 @@ jobs:
           import yaml
           with open('servers.yaml') as fh:
             read_data = yaml.load(fh,Loader=yaml.FullLoader)
-            vm_list=[]
-            for i in read_data:
-              vm_list.append(i["name"])
-          print(f'::set-output name=matrix::{vm_list}')
+            print(f'::set-output name=matrix::{read_data}')
         shell: python
   job2:
     needs: job1
