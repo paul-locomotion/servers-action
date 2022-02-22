@@ -20,23 +20,26 @@ jobs:
         id: setmatrix
         run: |
           import yaml
+          import json
           
           with open('servers.yaml') as fh:
             read_data = yaml.load(fh,Loader=yaml.FullLoader)
           vm_list=[]
           for i in read_data:
             vm_list.append(i["name"])
-          print(f"::set-output name=matrix::{vm_list}")
+          json_list = json.dumps(vm_list)
+          print(json_list)
+          print(f"::set-output name=matrix::{json_list}")
           
         shell: python
-    
     outputs:
-        matrix: ${{ steps.setmatrix.outputs.matrix }}
+        matrix: ${{ toJSON(steps.setmatrix.outputs.matrix) }}
   
   job2:
     needs: job1
     runs-on: ubuntu-latest
     strategy:
-       matrix: ${{ (outputs.matrix) }}
+       matrix:
+         os-versions: ${{ fromJSON(needs.job1.outputs.matrix) }}
     steps:
-     - run: echo ${{ fromJSON(needs.job1.outputs.matrix) }}
+     - run: echo ${{ needs.job1.outputs.matrix }}
