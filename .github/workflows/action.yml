@@ -30,9 +30,6 @@ jobs:
           print(f"::set-output name=matrix::{vm_list}")
           
         shell: python
-        
-      - name: Print name
-        run: echo "::set-output name=matrix::${{ steps.setmatrix.outputs.matrix }}"
     
     outputs:
         matrix: ${{ steps.setmatrix.outputs.matrix }}
@@ -40,7 +37,7 @@ jobs:
   job2:
     needs: job1
     runs-on: ubuntu-latest
-#     strategy:
-#        matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
+    strategy:
+       matrix: ${{ (needs.job1.outputs.matrix) }}
     steps:
      - run: echo ${{ fromJSON(needs.job1.outputs.matrix) }}
