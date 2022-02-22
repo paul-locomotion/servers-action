@@ -10,8 +10,8 @@ jobs:
   Test:
     name: Test 
     runs-on: ubuntu-latest
-    outputs:
-        matrix: ${{ steps.setmatrix.outputs.matrix }}
+#     outputs:
+#         matrix: ${{ steps.setmatrix.outputs.matrix }}
         
 #     strategy:
 #       matrix:
@@ -27,12 +27,12 @@ jobs:
           fetch-depth: 0
           
       - name: Inline python step
-        id: setmatrix
+#         id: setmatrix
         run: |
           import yaml
           
           with open('servers.yaml') as fh:
             read_data = yaml.load(fh, Loader=yaml.FullLoader)
-          print(read_data.get("name"))
+          print(read_data["name"])
          
         shell: python
