@@ -20,7 +20,6 @@ jobs:
         id: setmatrix
         run: |
           import yaml
-          import json
           
           with open('servers.yaml') as fh:
             read_data = yaml.load(fh,Loader=yaml.FullLoader)
@@ -38,6 +37,6 @@ jobs:
     needs: job1
     runs-on: ubuntu-latest
     strategy:
-       matrix: ${{ (needs.job1.outputs.matrix) }}
+       matrix: ${{ (outputs.matrix) }}
     steps:
      - run: echo ${{ fromJSON(needs.job1.outputs.matrix) }}
