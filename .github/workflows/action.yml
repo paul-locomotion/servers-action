@@ -31,12 +31,12 @@ jobs:
           
         shell: python
     outputs:
-        matrix: ${{ toJSON(steps.setmatrix.outputs.matrix) }}
+        matrix: ${{ steps.setmatrix.outputs.matrix }}
   
   job2:
     needs: job1
     runs-on: ubuntu-latest
-#     strategy:
-#        matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
+    strategy:
+       matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
     steps:
      - run: echo ${{ needs.job1.outputs.matrix }}
