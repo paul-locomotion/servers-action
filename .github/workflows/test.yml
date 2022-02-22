@@ -5,6 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
        matrix: ${{ steps.setmatrix.outputs.matrix }}
+       pyt: ${{ steps.pythonscript.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -27,7 +28,7 @@ jobs:
     needs: job1
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJson(needs.job1.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.job1.outputs.pyt) }}
     steps:
     - run: echo Run ${{ matrix.run }}
     - run: date
