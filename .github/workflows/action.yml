@@ -4,7 +4,7 @@ name: PythonTest
 on:
   push:
     branches:
-      - test
+      - test2
 
 jobs:
   job1:
