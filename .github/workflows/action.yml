@@ -33,7 +33,9 @@ jobs:
           
           with open('servers.yaml') as fh:
             read_data = yaml.safe_load(fh)
-          print(read_data[0])
-          print(read_data[0]["name"])
+          vm_list=[]
+          for i in read_data:
+            vm_list.append(i["name"])
+          print(vm_list)
          
         shell: python
