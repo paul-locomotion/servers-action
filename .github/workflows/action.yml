@@ -29,7 +29,7 @@ jobs:
             vm_list.append(i["name"])
           json_list = json.dumps(vm_list)
           print(json_list)
-          print(f"::set-output name=matrix::{json_list}")
+          print(f"::set-output name=matrix::[{json_list}]")
           
         shell: python
     outputs:
@@ -39,7 +39,6 @@ jobs:
     needs: job1
     runs-on: ubuntu-latest
     strategy:
-       matrix:
-         os-versions: ${{ fromJSON(needs.job1.outputs.matrix) }}
+       matrix: ${{fromJSON(needs.job1.outputs.matrix)}}
     steps:
      - run: echo ${{ needs.job1.outputs.matrix }}
