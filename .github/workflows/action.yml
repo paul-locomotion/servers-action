@@ -28,14 +28,15 @@ jobs:
           vm_list=[]
           for i in read_data:
             vm_list.append(i["name"])
-          print(f"::set-output name=matrix::{vm_list}")
-         
+          json_list = json.loads(vm_list)
+          print(f"::set-output name=matrix::{json_list}")
+          
         shell: python
   
   job2:
     needs: job1
     runs-on: ubuntu-latest
-#    strategy:
-#      matrix: ${{ toJson(fromJson(needs.job1.outputs.matrix)) }}
+#     strategy:
+#        matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
     steps:
      - run: echo ${{ needs.job1.outputs.matrix }}
