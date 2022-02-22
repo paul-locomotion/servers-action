@@ -30,7 +30,7 @@ jobs:
           
         shell: python
     outputs:
-        matrix: ${{ steps.setmatrix.outputs.matrix }}
+        matrix: ${{ toJSON(steps.setmatrix.outputs.matrix) }}
   
   job2:
     needs: job1
