@@ -11,6 +11,17 @@ jobs:
         run: |
            matrixStringifiedObject="{\"include\":[{\"run\":\"run1\"},{\"run\":\"run2\"}]}"
            echo "::set-output name=matrix::$matrixStringifiedObject"
+      - name: Inline python step
+        id: pythonscript
+        run: |
+          import yaml
+          with open('servers.yaml') as fh:
+            read_data = yaml.load(fh,Loader=yaml.FullLoader)
+            vm_list=[]
+            for i in read_data:
+              vm_list.append(i["name"])
+          print(f'::set-output name=matrix::{vm_list}')
+        shell: python
   job2:
     needs: job1
     runs-on: ubuntu-latest
