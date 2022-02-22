@@ -33,6 +33,6 @@ jobs:
           
           with open('servers.yaml') as fh:
             read_data = yaml.safe_load(fh)
-          print(read_data["name"])
+          print(d['name'] for d in read_data)
          
         shell: python
