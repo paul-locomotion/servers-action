@@ -33,6 +33,7 @@ jobs:
           
           with open('servers.yaml') as fh:
             read_data = yaml.load(fh, Loader=yaml.FullLoader)
-          print("::set-output name=matrix::$read_data")
-        
+            names = yaml.safe_load(name)
+          print(names)
+         
         shell: python
