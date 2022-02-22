@@ -28,7 +28,7 @@ jobs:
           vm_list=[]
           for i in read_data:
             vm_list.append(i["name"])
-          print("::set-output name=matrix::{vm_list}")
+          print(f"::set-output name=matrix::{vm_list}")
          
         shell: python
   
