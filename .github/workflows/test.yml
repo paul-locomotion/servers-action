@@ -22,12 +22,12 @@ jobs:
           import yaml
           x = {}
           with open('servers.yaml') as fh:
-          runs = []
-          read_data = yaml.load(fh,Loader=yaml.FullLoader)
-          for i in read_data:
-            s = {}
-            s['run'] = i['name']
-            runs.append(s)
+            runs = []
+            read_data = yaml.load(fh,Loader=yaml.FullLoader)
+            for i in read_data:
+              s = {}
+              s['run'] = i['name']
+              runs.append(s)
           x['include'] = runs
           print(f'::set-output name=matrix::{x}')
         shell: python
