@@ -27,11 +27,15 @@ jobs:
           vm_list=[]
           for i in read_data:
             vm_list.append(i["name"])
-          print(f'::set-output name=matrix::{vm_list}')
+          print(f"::set-output name=matrix::{vm_list}")
           
         shell: python
+        
+      - name: Print name
+        run: echo "::set-output name=matrix::${{ steps.setmatrix.outputs.matrix }}"
+    
     outputs:
-        matrix: ${{ toJSON(steps.setmatrix.outputs.matrix) }}
+        matrix: ${{ steps.setmatrix.outputs.matrix }}
   
   job2:
     needs: job1
