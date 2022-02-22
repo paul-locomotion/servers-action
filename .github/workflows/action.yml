@@ -7,19 +7,10 @@ on:
       - test
 
 jobs:
-  Test:
-    name: Test 
+  job1:
     runs-on: ubuntu-latest
-#     outputs:
-#         matrix: ${{ steps.setmatrix.outputs.matrix }}
-        
-#     strategy:
-#       matrix:
-#         image:
-#           - 'ubuntu2004'
-#           - 'centos7'
-#           - 'centos8'
-    
+    outputs:
+      matrix: ${{ steps.setmatrix.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -27,15 +18,24 @@ jobs:
           fetch-depth: 0
           
       - name: Inline python step
-#         id: setmatrix
+        id: setmatrix
         run: |
           import yaml
+          import json
           
           with open('servers.yaml') as fh:
             read_data = yaml.safe_load(fh)
           vm_list=[]
           for i in read_data:
             vm_list.append(i["name"])
-          print(::set-output name=myOutput::{vm_list})
+          print("::set-output name=matrix::{vm_list}")
          
         shell: python
+  
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+#    strategy:
+#      matrix: ${{ toJson(fromJson(needs.job1.outputs.matrix)) }}
+    steps:
+     - run: echo ${{ job1.outputs.matrix }}
