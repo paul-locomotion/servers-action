@@ -25,12 +25,12 @@ jobs:
           
           with open('servers.yaml') as fh:
             print(json.dumps(yaml.load(fh))
-          vm_list=[]
-          for i in read_data:
-            vm_list.append(i["name"])
-          json_list = json.dumps(vm_list)
-          print(json_list)
-          print(f"::set-output name=matrix::{json_list}")
+#          vm_list=[]
+#          for i in read_data:
+#            vm_list.append(i["name"])
+#          json_list = json.dumps(vm_list)
+#          print(json_list)
+#          print(f"::set-output name=matrix::{json_list}")
           
         shell: python
   
