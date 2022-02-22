@@ -1,0 +1,33 @@
+---
+# Python yaml load test
+name: PythonTest
+on:
+  push:
+    branches:
+      - test
+
+jobs:
+  Test:
+    name: Test 
+    runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         image:
+#           - 'ubuntu2004'
+#           - 'centos7'
+#           - 'centos8'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          
+      - name: Inline python step
+        run: |
+          import yaml
+          
+          with open('servers.yaml') as fh:
+            read_data = yaml.load(fh, Loader=yaml.FullLoader)
+          print(read_data)
+        
+        shell: python
