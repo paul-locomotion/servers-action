@@ -9,8 +9,7 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.setmatrix.outputs.matrix }}
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -33,6 +32,8 @@ jobs:
           print(f"::set-output name=matrix::{json_list}")
           
         shell: python
+    outputs:
+        matrix: '${{ steps.setmatrix.outputs.matrix }}'
   
   job2:
     needs: job1
