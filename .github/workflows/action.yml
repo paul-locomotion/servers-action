@@ -32,7 +32,7 @@ jobs:
           import yaml
           
           with open('servers.yaml') as fh:
-            read_data = yaml.load(fh, Loader=yaml.FullLoader)
+            read_data = yaml.safe_load(fh)
           print(read_data)
          
         shell: python
