@@ -29,6 +29,7 @@ jobs:
           for i in read_data:
             vm_list.append(i["name"])
           json_list = json.dumps(vm_list)
+          print(json_list)
           print(f"::set-output name=matrix::{json_list}")
           
         shell: python
