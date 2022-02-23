@@ -23,7 +23,7 @@ jobs:
           x = {}
           with open('servers.yaml') as fh:
             runs = []
-            read_data = yaml.load(fh,Loader=yaml.FullLoader)
+            read_data = yaml.safe_load(fh)
             for i in read_data:
               s = {}
               s['run'] = i['name']
