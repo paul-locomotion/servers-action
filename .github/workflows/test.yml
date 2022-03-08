@@ -1,5 +1,8 @@
 name: Sample Run Include Syntax Json Format
-on: repository_dispatch
+on:
+  repository_dispatch:
+  schedule:
+    - cron: '5 12 * * 0'
 jobs:
   job1:
     runs-on: ubuntu-latest
