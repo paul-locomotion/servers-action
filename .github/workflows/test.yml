@@ -1,5 +1,5 @@
 name: Sample Run Include Syntax Json Format
-on: push
+on: repository_dispatch
 jobs:
   job1:
     runs-on: ubuntu-latest
